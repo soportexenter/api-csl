@@ -2,8 +2,8 @@ import axios from 'axios';
 import fs from 'fs';
 import cron from 'node-cron';
 
-const url = "https://api.clientify.net/v1/contacts/";
-const apiKey = "038727a74b865e6da82c6aa435f4f9e5a166a35d";
+const url = "API-ENVIO-URL";
+const apiKey = "TOKEN";
 
 const headers = {
   "Authorization": `Token ${apiKey}`
