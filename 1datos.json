@@ -1,0 +1,97 @@
+{
+  "id": 1,
+  "rut": "1-9",
+  "tipo_documento":0,
+  "nombre": "Guillermo",
+  "nombre_social": "Camila",
+  "apellidos": "Morales",
+  "fecha_nacimiento": "1985-01-01",
+  "fecha_afiliacion" : "2018-02-02",
+  "telefono": "212345678",
+  "celular": "12345678",
+  "ciudad": "Santiago",
+  "comuna": "Vitacura",
+  "direccion": "",
+  "email": "guillermo@test.com",
+  "sexo": "M",
+  "id_genero": 1,
+  "numero_ficha": "234567",
+  "observaciones":"",
+  "tiene_cargas": 1,
+  "es_carga": 0,
+  "fecha_deshabilitacion": "",
+  "id_usuario_deshabilitacion": "",
+  "habilitado": 0,
+  "links": [
+      {
+          "rel": "self",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1",
+          "method": "GET"
+      },
+      {
+          "rel": "self",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/apoderados",
+          "method": "GET"
+      },
+      {
+          "rel": "self",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/archivos",
+          "method": "GET"
+      },
+      {
+          "rel": "self",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/cargas",
+          "method": "GET"
+      },
+      {
+          "rel": "citas",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/citas",
+          "method": "GET"
+      },
+      {
+          "rel": "convenios",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/convenios",
+          "method": "GET"
+      },
+      {
+          "rel": "devoluciones",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/devoluciones",
+          "method": "GET"
+      },
+      {
+          "rel": "evoluciones",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/evoluciones",
+          "method": "GET"
+      },
+      {
+          "rel": "pagos",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/pagos",
+          "method": "GET"
+      },
+      {
+          "rel": "tratamientos",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/tratamientos",
+          "method": "GET"
+      },
+      {
+          "rel": "adicionales",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/adicionales",
+          "method": "GET"
+      },
+      {
+          "rel": "tareas",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/tareas",
+          "method": "GET"
+      },
+      {
+          "rel": "recetas",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/recetas",
+          "method": "GET"
+      },
+      {
+          "rel": "notificacionesGes",
+          "href": "https://api.dentalink.healthatom.com/api/v1/pacientes/1/notificacionesGes",
+          "method": "GET"
+      }
+  ]
+}
