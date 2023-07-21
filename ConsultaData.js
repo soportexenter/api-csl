@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 import cron from 'node-cron';
 
-const url = "https://cluster0-wg4mg6x-mongodb-net.onrender.com/api/all-tasks";
+const url = "API-CONSULTA-URL";
 
 fetch(url) 
   .then((response) => response.json())
