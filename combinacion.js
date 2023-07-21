@@ -3,9 +3,9 @@ import fs from 'fs';
 import cron from 'node-cron';
 import axios from 'axios';
 
-const urlFetch = "https://cluster0-wg4mg6x-mongodb-net.onrender.com/api/all-tasks";
-const urlPost = "https://api.clientify.net/v1/contacts/";
-const apiKey = "038727a74b865e6da82c6aa435f4f9e5a166a35d";
+const urlFetch = "URL-API-1(consulta)";
+const urlPost = "URL-API-2(envio)";
+const apiKey = "token-de-la-api";
 
 const headers = {
   "Authorization": `Token ${apiKey}`
