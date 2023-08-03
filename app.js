@@ -3,7 +3,7 @@ import fs from 'fs';
 import cron from 'node-cron';
 import axios from 'axios';
 
-const urlFetch = "URL-API-1(consulta)";
+const urlFetch = "https://cluster0-wg4mg6x-mongodb-net.onrender.com/api/all-tasks";
 const urlPost = "URL-API-2(envio)";
 const apiKey = "token-de-la-api";
 
