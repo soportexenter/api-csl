@@ -1,73 +1,89 @@
+import fetch from 'node-fetch';
 import fs from 'fs';
 import axios from 'axios';
-import cron from 'node-cron'; // Importa el módulo cron
 
-const urlPost = "https://api.clientify.net/v1/contacts/";
+const urlFetch = "https://api.dentalink.healthatom.com/api/v1/pacientes";
+const urlPost = "https://api.clientify.net/v1/contacts/test";
 const apiKey = "038727a74b865e6da82c6aa435f4f9e5a166a35d";
+const apiKeyConsulta = "i1M88WwcvHZ1vUBGDnpDyXYDf2TFpbYuRjoeVh64.OXaPjS9OPDTIPZBaC8SzNQrIWnzCfrIGPhls05ub";
+
 const headers = {
   "Authorization": `Token ${apiKey}`
+};
+const header = {
+  "Authorization": `Token ${apiKeyConsulta}`
 };
 
 const capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
 
-const sendDataToAPI = async () => {
-  try {
-    const data = fs.readFileSync('datos.json', 'utf8');
-    const jsonData = JSON.parse(data);
+const sendDataToAPI = () => {
+  fetch(urlFetch, {
+    headers: header
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const patients = data.data; // Obtener la lista de pacientes
 
-    let sentContacts = 0;
+      fs.writeFile('datosaEnviar.json', JSON.stringify(data, null, 2), (err) => {
+        if (err) {
+          console.error('Error al guardar los datos:', err);
+        } else {
+          console.log('Datos guardados correctamente en datostest.json');
+          processAllPatients(patients); // Llamar a la función para procesar todos los pacientes
+        }
+      });
+    })
+    .catch((error) => {
+      console.error('Error al obtener los datos desde la API:', error);
+    });
+};
 
-    for (const patient of jsonData.data) {
-      const emailObj = {
-        type: 4,
-        email: patient.email
-      };
+const processAllPatients = (patients) => {
+  patients.forEach((patient) => {
+    processJsonData(patient); // Llamar a la función de procesamiento para cada paciente
+  });
+};
 
-      const telefonoObj = {
-        type: 1,
-        telefono: patient.celular
-      };
 
-      const direccionObj = {
-        type: 1,
-        street: patient.direccion,
-        city: patient.ciudad
-      };
+const processJsonData = (patient) => { // Changed parameter name to clarify it represents a patient object
+  const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento } = patient;
 
-      const selectedData = {
-        first_name: capitalize(patient.nombre),
-        last_name: capitalize(patient.apellidos),
-        emails: [emailObj],
-        phones: [telefonoObj],
-        addresses: [direccionObj],
-        //birthday: patient.fecha_nacimiento
-      };
+  const emailObj = {
+    type: 4,
+    email: email
+  };
 
-      console.log('Datos a enviar:', selectedData);
+  const telefonoObj = {
+    type: 1,
+    telefono: telefono
+  };
 
-      const response = await axios.post(urlPost, selectedData, { headers });
+  const direccionObj = {
+    type: 1,
+    street: direccion,
+    city: ciudad
+  };
+
+  const selectedData = {
+    first_name: capitalize(nombre), // Fixed parameter name
+    last_name: capitalize(apellidos), // Fixed parameter name
+    emails: [emailObj],
+    phones: [telefonoObj],
+    addresses: [direccionObj],
+    birthday: fecha_nacimiento
+  };
+
+  console.log('Datos a enviar:', selectedData);
+
+  axios.post(urlPost, selectedData, { headers })
+    .then(response => {
       console.log('Respuesta del servidor:', response.data);
-
-      sentContacts++;
-    }
-
-    console.log(`Se enviaron ${sentContacts} contactos al servidor.`);
-  } catch (error) {
-    console.error('Error al enviar los datos:', error.message);
-  }
+    })
+    .catch(error => {
+      console.error('Error al realizar la solicitud POST:', error.message);
+    });
 };
 
 sendDataToAPI();
-
-
-// Ejecutar cada 50 minutos
-cron.schedule('*/50 * * * *', () => {
-  sendDataToAPI();
-});
-
-// Ejecutar cada 50 minutos
-cron.schedule('*/50 * * * *', () => {
-  sendDataToAPI();
-});
