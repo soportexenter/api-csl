@@ -1,74 +1,71 @@
-import fetch from 'node-fetch';
 import fs from 'fs';
-import cron from 'node-cron';
 import axios from 'axios';
+import cron from 'node-cron'; // Importa el módulo cron
 
-const urlFetch = "https://cluster0-wg4mg6x-mongodb-net.onrender.com/api/all-tasks";
-const urlPost = "URL-API-2(envio)";
-const apiKey = "token-de-la-api";
-
+const urlPost = "https://api.clientify.net/v1/contacts/";
+const apiKey = "038727a74b865e6da82c6aa435f4f9e5a166a35d";
 const headers = {
   "Authorization": `Token ${apiKey}`
 };
 
-const sendDataToAPI = () => {
-  fetch(urlFetch)
-    .then((response) => response.json())
-    .then((data) => {
-      fs.writeFile('datos.json', JSON.stringify(data, null, 2), (err) => {
-        if (err) {
-          console.error('Error al guardar los datos:', err);
-        } else {
-          console.log('Datos guardados correctamente en datos.json');
-          processJsonData(data);
-        }
-      });
-    })
-    .catch((error) => {
-      console.error('Error al obtener los datos desde la API:', error);
-    });
+const capitalize = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
 
-const processJsonData = (data) => {
-  const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento } = data;
+const sendDataToAPI = async () => {
+  try {
+    const data = fs.readFileSync('datos.json', 'utf8');
+    const jsonData = JSON.parse(data);
 
-  const emailObj = {
-    type: 4,
-    email: email
-  };
+    let sentContacts = 0;
 
-  const telefonoObj = {
-    type: 1,
-    telefono: telefono
-  };
+    for (const patient of jsonData.data) {
+      const emailObj = {
+        type: 4,
+        email: patient.email
+      };
 
-  const direccionObj = {
-    type: 1,
-    street: direccion,
-    city: ciudad
-  };
+      const telefonoObj = {
+        type: 1,
+        telefono: patient.celular
+      };
 
-  const selectedData = {
-    first_name: nombre,
-    last_name: apellidos,
-    emails: [emailObj],
-    phones: [telefonoObj],
-    addresses: [direccionObj],
-    birthday: fecha_nacimiento
-  };
+      const direccionObj = {
+        type: 1,
+        street: patient.direccion,
+        city: patient.ciudad
+      };
 
-  console.log('Datos a enviar:', selectedData);
+      const selectedData = {
+        first_name: capitalize(patient.nombre),
+        last_name: capitalize(patient.apellidos),
+        emails: [emailObj],
+        phones: [telefonoObj],
+        addresses: [direccionObj],
+        //birthday: patient.fecha_nacimiento
+      };
 
-  axios.post(urlPost, selectedData, { headers })
-    .then(response => {
+      console.log('Datos a enviar:', selectedData);
+
+      const response = await axios.post(urlPost, selectedData, { headers });
       console.log('Respuesta del servidor:', response.data);
-    })
-    .catch(error => {
-      console.error('Error al realizar la solicitud POST:', error.message);
-    });
+
+      sentContacts++;
+    }
+
+    console.log(`Se enviaron ${sentContacts} contactos al servidor.`);
+  } catch (error) {
+    console.error('Error al enviar los datos:', error.message);
+  }
 };
 
 sendDataToAPI();
+
+
+// Ejecutar cada 50 minutos
+cron.schedule('*/50 * * * *', () => {
+  sendDataToAPI();
+});
 
 // Ejecutar cada 50 minutos
 cron.schedule('*/50 * * * *', () => {
