@@ -17,7 +17,7 @@ const headers = {
 
 const generateRandomEmail = (name, surname) => {
   const randomString = Math.random().toString(36).substring(7);
-  const email = `clinicasantaluciana.emailRandom.${name.toLowerCase()}.${surname.toLowerCase()}.${randomString}@example.com`;
+  const email = `emailRandom.${name.toLowerCase()}.${surname.toLowerCase()}.${randomString}@clinicasantaluciana.com`;
   return email;
 };
 
