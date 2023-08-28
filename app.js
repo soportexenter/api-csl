@@ -3,7 +3,7 @@ import fs from 'fs';
 import cron from 'node-cron'; // Asegúrate de importar el módulo 'node-cron'
 
 const urlFetch = "https://api.dentalink.healthatom.com/api/v1/pacientes";
-const urlPost = "https://api.clientify.net/v1/contacts/";
+const urlPost = "https://api.clientify.net/v1/contacts/   null";
 const apiKeyConsulta = "i1M88WwcvHZ1vUBGDnpDyXYDf2TFpbYuRjoeVh64.OXaPjS9OPDTIPZBaC8SzNQrIWnzCfrIGPhls05ub";
 const apiKey = "529f345a1219496efc6bc6664b76cf6aeebaea3c";
 
