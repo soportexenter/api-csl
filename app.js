@@ -1,6 +1,6 @@
 import axios from 'axios';
 import fs from 'fs';
-import cron from 'node-cron'; // Asegúrate de importar el módulo 'node-cron'
+import cron from 'node-cron';
 
 const urlFetch = "https://api.dentalink.healthatom.com/api/v1/pacientes";
 const urlPost = "https://api.clientify.net/v1/contacts/";
@@ -15,14 +15,32 @@ const headers = {
   "Authorization": `Token ${apiKey}`
 };
 
-const generateRandomEmail = (name, surname) => {
-  const randomString = Math.random().toString(36).substring(7);
-  const email = `emailRandom.${name.toLowerCase()}.${surname.toLowerCase()}.${randomString}@clinicasantaluciana.com`;
+const generateRandomEmail = (name, surname, email = '') => {
+  if (email === '') {
+    const randomString = Math.random().toString(36).substring(7);
+    email = `emailRandom.${name.toLowerCase()}.${surname.toLowerCase()}.${randomString}@clinicasantaluciana.com`;
+  }
   return email;
 };
 
 const capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
+
+const checkExistingContact = async (email) => {
+  try {
+    const response = await axios.get(urlPost, {
+      headers: headers,
+      params: {
+        email: email
+      }
+    });
+
+    return response.data.length > 0;
+  } catch (error) {
+    console.error('Error al verificar el contacto existente:', error);
+    return false;
+  }
 };
 
 const getAllContacts = async () => {
@@ -51,13 +69,6 @@ const getAllContacts = async () => {
       break;
     }
   }
-
-  // Sort contacts by fecha_nacimiento in descending order
-  return allContacts.sort((a, b) => {
-    const dateA = new Date(a.fecha_nacimiento);
-    const dateB = new Date(b.fecha_nacimiento);
-    return dateB - dateA;
-  });
 };
 
 const sendFirstContactToAPI = async () => {
@@ -69,9 +80,17 @@ const sendFirstContactToAPI = async () => {
 
       const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento } = firstContact;
 
+      let selectedEmail = email || generateRandomEmail(nombre, apellidos);
+      
+      // Verifica si el email ya existe en la API antes de continuar
+      if (await checkExistingContact(selectedEmail)) {
+        console.log('El contacto ya existe en la API.');
+        return;
+      }
+
       const emailObj = {
         type: 4,
-        email: email || generateRandomEmail(nombre, apellidos)
+        email: selectedEmail
       };
 
       const telefonoObj = {
@@ -119,20 +138,19 @@ const sendFirstContactToAPI = async () => {
   }
 };
 
-//sendFirstContactToAPI();
-
 // Función que ejecuta el código
 const executeCode = async () => {
-    try {
-      await sendFirstContactToAPI();
-      console.log('Código ejecutado correctamente.');
-    } catch (error) {
-      console.error('Error al ejecutar el código:', error);
-    }
-  };
-  
-  // Cron para ejecutar el código cada 20 minutos
-  cron.schedule('* * * * *', () => {
-    console.log('Ejecutando el código cada 20 minutos.');
-    executeCode();
-  });
+  try {
+    await sendFirstContactToAPI();
+    console.log('Código ejecutado correctamente.');
+  } catch (error) {
+    console.error('Error al ejecutar el código:', error);
+  }
+};
+
+// Cron para ejecutar el código cada 1 minuto
+cron.schedule('* * * * *', () => {
+  console.log('Ejecutando el código cada 1 minuto.');
+  executeCode();
+});
+
