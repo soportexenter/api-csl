@@ -3,7 +3,7 @@ import fs from 'fs';
 import cron from 'node-cron';
 
 const urlFetch = "https://api.dentalink.healthatom.com/api/v1/pacientes";
-const urlPost = "https://api.clientify.net/v1/contacts/";
+const urlPost = "https://api.clientify.net/v1/contacts/  null";
 const apiKeyConsulta = "i1M88WwcvHZ1vUBGDnpDyXYDf2TFpbYuRjoeVh64.OXaPjS9OPDTIPZBaC8SzNQrIWnzCfrIGPhls05ub";
 const apiKey = "529f345a1219496efc6bc6664b76cf6aeebaea3c";
 
@@ -15,10 +15,13 @@ const headers = {
   "Authorization": `Token ${apiKey}`
 };
 
-const generateRandomEmail = (email = '') => {
+const generateRandomEmail = (name, surname, email = '') => {
+  name = name.replace(/\s+/g, ''); // Elimina los espacios del nombre
+  surname = surname.replace(/\s+/g, ''); // Elimina los espacios del apellido
+
   if (email === '') {
     const randomString = Math.random().toString(36).substring(7);
-    email = `emailRandom.@clinicasantaluciana.com`;
+    email = `emailRandom.${name.toLowerCase()}.${surname.toLowerCase()}@clinicasantaluciana.com`;
   }
   return email;
 };
@@ -69,6 +72,13 @@ const getAllContacts = async () => {
       break;
     }
   }
+
+  // Sort contacts by fecha_nacimiento in descending order
+  return allContacts.sort((a, b) => {
+    const dateA = new Date(a.fecha_nacimiento);
+    const dateB = new Date(b.fecha_nacimiento);
+    return dateB - dateA;
+  });
 };
 
 const sendFirstContactToAPI = async () => {
@@ -80,7 +90,7 @@ const sendFirstContactToAPI = async () => {
 
       const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento } = firstContact;
 
-      let selectedEmail = email || generateRandomEmail();
+      let selectedEmail = email || generateRandomEmail(nombre, apellidos);
       
       // Verifica si el email ya existe en la API antes de continuar
       if (await checkExistingContact(selectedEmail)) {
@@ -110,6 +120,10 @@ const sendFirstContactToAPI = async () => {
         emails: [emailObj],
         phones: [telefonoObj],
         addresses: [direccionObj],
+        owner_name: "",
+        owner: " ",
+        tags: [],
+        
         // birthday: fecha_nacimiento
       };
 
