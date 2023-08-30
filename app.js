@@ -3,9 +3,9 @@ import fs from 'fs';
 import cron from 'node-cron';
 
 const urlFetch = "https://api.dentalink.healthatom.com/api/v1/pacientes";
-const urlPost = "https://api.clientify.net/v1/contacts/  null";
+const urlPost = "https://api.clientify.net/v1/contacts/";
 const apiKeyConsulta = "i1M88WwcvHZ1vUBGDnpDyXYDf2TFpbYuRjoeVh64.OXaPjS9OPDTIPZBaC8SzNQrIWnzCfrIGPhls05ub";
-const apiKey = "529f345a1219496efc6bc6664b76cf6aeebaea3c";
+const apiKey = "038727a74b865e6da82c6aa435f4f9e5a166a35d";
 
 const header = {
   "Authorization": `Token ${apiKeyConsulta}`
@@ -120,11 +120,8 @@ const sendFirstContactToAPI = async () => {
         emails: [emailObj],
         phones: [telefonoObj],
         addresses: [direccionObj],
-        owner_name: "",
-        owner: " ",
-        tags: [],
-        
-        // birthday: fecha_nacimiento
+        owner_name: "Claudia Yanes",
+        owner: "contactenos@clinicasantaluciana.com.co"
       };
 
       console.log('Datos a enviar:', selectedData);
