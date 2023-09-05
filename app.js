@@ -117,7 +117,8 @@ const sendFirstContactToAPI = async () => {
       };
 
       const custom_field = {
-         type: "",
+        
+        type: "note",
         nit: rut
       };
 
@@ -132,7 +133,8 @@ const sendFirstContactToAPI = async () => {
         owner_name: "Claudia Yanes",
         owner: "contactenos@clinicasantaluciana.com.co",
         tags: ["Dentalink","api-test"],
-        custom_fields: [custom_field]
+        description: [custom_field],
+        //custom_fields: [custom_field]
       };
 
 
