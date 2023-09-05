@@ -88,7 +88,7 @@ const sendFirstContactToAPI = async () => {
     if (allContacts.length > 0) {
       const firstContact = allContacts[0];
 
-      const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento } = firstContact;
+      const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento,rut } = firstContact;
 
       let selectedEmail = email || generateRandomEmail(nombre, apellidos);
       
@@ -102,7 +102,10 @@ const sendFirstContactToAPI = async () => {
         type: 4,
         email: selectedEmail
       };
-
+      const CedulaObj ={
+        "cedula": rut
+      }
+      
       const telefonoObj = {
         type: 1,
         telefono: telefono
@@ -122,7 +125,7 @@ const sendFirstContactToAPI = async () => {
         addresses: [direccionObj],
         owner_name: "Claudia Yanes",
         owner: "contactenos@clinicasantaluciana.com.co",
-       
+       custom_fields: [CedulaObj]
         
         // birthday: fecha_nacimiento
       };
