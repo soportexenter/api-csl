@@ -119,6 +119,12 @@ const sendFirstContactToAPI = async () => {
       const cedulaObj ={
         cedula: rut
       };
+const description = {
+  cedula: rut,
+  Genero: sexo,
+  Cumpleaños: fecha_nacimiento
+};
+
       
       const selectedData = {
         first_name: capitalize(nombre), 
@@ -129,7 +135,7 @@ const sendFirstContactToAPI = async () => {
         owner_name: "Claudia Yanes",
         owner: "contactenos@clinicasantaluciana.com.co",
         tags: ["Dentalink","api-test"],
-        description: {"cedula: " + rut, "\nGenero: " + sexo, "\nCumpleaños: " + fecha_nacimiento}
+        description: description
         //birthday: fecha_nacimiento
       };
 
