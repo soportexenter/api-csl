@@ -108,6 +108,7 @@ const sendFirstContactToAPI = async () => {
       
       const telefonoObj = {
         type: 1,
+        phone: celular,
         celular:telefono
       };
 
