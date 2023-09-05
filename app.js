@@ -103,7 +103,7 @@ const sendFirstContactToAPI = async () => {
         email: selectedEmail
       };
       const CedulaObj ={
-        "cedula": rut
+        "cedula_Paciente": rut
       }
       
       const telefonoObj = {
