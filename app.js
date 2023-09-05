@@ -88,7 +88,7 @@ const sendFirstContactToAPI = async () => {
     if (allContacts.length > 0) {
       const firstContact = allContacts[0];
 
-      const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento, celular,rut } = firstContact;
+      const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento, celular,  rut } = firstContact;
 
       let selectedEmail = email || generateRandomEmail(nombre, apellidos);
       
@@ -102,9 +102,7 @@ const sendFirstContactToAPI = async () => {
         type: 4,
         email: selectedEmail
       };
-      const CedulaObj ={
-        cedula: rut
-      };
+
       
       const telefonoObj = {
         type: 1,
@@ -118,6 +116,10 @@ const sendFirstContactToAPI = async () => {
         city: ciudad
       };
 
+      const cedulaObj ={
+        cedula: rut
+      };
+      
       const selectedData = {
         first_name: capitalize(nombre), 
         last_name: capitalize(apellidos), 
@@ -126,9 +128,8 @@ const sendFirstContactToAPI = async () => {
         addresses: [direccionObj],
         owner_name: "Claudia Yanes",
         owner: "contactenos@clinicasantaluciana.com.co",
-        custom_fields: [CedulaObj],
-        
-        // birthday: fecha_nacimiento
+        tags: ["Dentalink","api-test"],
+        //birthday: fecha_nacimiento
       };
 
       console.log('Datos a enviar:', selectedData);
