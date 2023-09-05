@@ -116,7 +116,8 @@ const sendFirstContactToAPI = async () => {
         city: ciudad
       };
 
-      const custom_field ={
+      const custom_field = {
+         type: "",
         nit: rut
       };
 
