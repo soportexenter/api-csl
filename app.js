@@ -129,7 +129,7 @@ const sendFirstContactToAPI = async () => {
         owner_name: "Claudia Yanes",
         owner: "contactenos@clinicasantaluciana.com.co",
         tags: ["Dentalink","api-test"],
-        comment: "cedula" + rut
+        description: "cedula" + rut
         //birthday: fecha_nacimiento
       };
 
