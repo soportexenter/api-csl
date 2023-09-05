@@ -5,7 +5,7 @@ import cron from 'node-cron';
 const urlFetch = "https://api.dentalink.healthatom.com/api/v1/pacientes";
 const urlPost = "https://api.clientify.net/v1/contacts/";
 const apiKeyConsulta = "i1M88WwcvHZ1vUBGDnpDyXYDf2TFpbYuRjoeVh64.OXaPjS9OPDTIPZBaC8SzNQrIWnzCfrIGPhls05ub";
-const apiKey = "529f345a1219496efc6bc6664b76cf6aeebaea3c";
+const apiKey = "038727a74b865e6da82c6aa435f4f9e5a166a35d";
 
 const header = {
   "Authorization": `Token ${apiKeyConsulta}`
@@ -88,7 +88,7 @@ const sendFirstContactToAPI = async () => {
     if (allContacts.length > 0) {
       const firstContact = allContacts[0];
 
-      const { nombre, apellidos, email, telefono, direccion, ciudad, rut } = firstContact;
+      const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento } = firstContact;
 
       let selectedEmail = email || generateRandomEmail(nombre, apellidos);
       
@@ -114,18 +114,15 @@ const sendFirstContactToAPI = async () => {
         city: ciudad
       };
 
-      const cedulaCor = {
-        cedula: rut
-      }
       const selectedData = {
         first_name: capitalize(nombre), 
         last_name: capitalize(apellidos), 
         emails: [emailObj],
         phones: [telefonoObj],
         addresses: [direccionObj],
-        owner_name: "",
-        owner: " ",
-        custom_fields: [cedulaCor]
+        owner_name: "Claudia Yanes",
+        owner: "contactenos@clinicasantaluciana.com.co",
+       
         
         // birthday: fecha_nacimiento
       };
