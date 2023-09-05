@@ -123,7 +123,7 @@ const sendFirstContactToAPI = async () => {
         owner_name: "",
         owner: " ",
         //tags: [{}],
-        custom_fields[{cedula:rut}]
+        custom_fields: [{cedula:rut}]
         
         // birthday: fecha_nacimiento
       };
