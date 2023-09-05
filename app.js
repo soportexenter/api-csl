@@ -132,6 +132,7 @@ const sendFirstContactToAPI = async () => {
         owner: "contactenos@clinicasantaluciana.com.co",
         tags: ["Dentalink","api-test"],
         custom_fields: [custom_field]
+      };
 
 
       console.log('Datos a enviar:', selectedData);
