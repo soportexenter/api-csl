@@ -126,7 +126,24 @@ const sendFirstContactToAPI = async () => {
 
       //const formattedBirthday = moment(fecha_nacimiento).format(); // Formatea la fecha de nacimiento
 
+      const fechaCompleta = moment(fecha_nacimiento + hora_y_offset, moment.ISO_8601);
+
+const selectedData = {
+  first_name: capitalize(nombre),
+  last_name: capitalize(apellidos),
+  emails: [emailObj],
+  phones: [telefonoObj],
+  addresses: [direccionObj],
+  owner_name: "Claudia Yanes",
+  owner: "contactenos@clinicasantaluciana.com.co",
+  tags: ["Dentalink", "api-test"],
+  description: "cedula: " + rut + "\ngenero: " + sexo + "\nNombre Acompañante: " + nombre_acompanante,
+  
+  // Establece la fecha de cumpleaños formateada con hora y offset
+  birthday: fechaCompleta.format('YYYY-MM-DDTHH:mm:ssZ'),
+     };
       
+  /*
       const selectedData = {
         first_name: capitalize(nombre), 
         last_name: capitalize(apellidos), 
@@ -140,7 +157,7 @@ const sendFirstContactToAPI = async () => {
         //custom_fields: [custom_field]
         //birthday: formattedBirthday
       };
-
+*/
 
       console.log('Datos a enviar:', selectedData);
 
