@@ -88,7 +88,7 @@ const sendFirstContactToAPI = async () => {
     if (allContacts.length > 0) {
       const firstContact = allContacts[0];
 
-      const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento , celular} = firstContact;
+      const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento } = firstContact;
 
       let selectedEmail = email || generateRandomEmail(nombre, apellidos);
       
@@ -108,7 +108,7 @@ const sendFirstContactToAPI = async () => {
       
       const telefonoObj = {
         type: 1,
-        telefono: celular
+        celular:telefono
       };
 
       const direccionObj = {
