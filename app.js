@@ -119,11 +119,7 @@ const sendFirstContactToAPI = async () => {
       const cedulaObj ={
         cedula: rut
       };
-const description = {
-  cedula: rut,
-  Genero: sexo,
-  Cumpleaños: fecha_nacimiento
-};
+
 
       
       const selectedData = {
@@ -135,9 +131,7 @@ const description = {
         owner_name: "Claudia Yanes",
         owner: "contactenos@clinicasantaluciana.com.co",
         tags: ["Dentalink","api-test"],
-        description: description
-        //birthday: fecha_nacimiento
-      };
+
 
       console.log('Datos a enviar:', selectedData);
 
