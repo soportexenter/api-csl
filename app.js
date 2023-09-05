@@ -121,7 +121,7 @@ const sendFirstContactToAPI = async () => {
       const custom_field = {
         
         type: "note",
-        nit: rut
+        custom_field_377226: rut
       };
 
      
@@ -136,7 +136,7 @@ const sendFirstContactToAPI = async () => {
         owner: "contactenos@clinicasantaluciana.com.co",
         tags: ["Dentalink"],
         description: "Cedula: " + rut + "\nGenero: " + sexo + "\nNombre Acompañante: " + nombre_acompanante,
-        //custom_fields: [custom_field]
+        custom_fields: [custom_field]
         //birthday: formattedBirthday
       };
 
