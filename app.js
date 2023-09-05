@@ -176,14 +176,7 @@ const executeCode = async () => {
   }
 };
 
-// Cron para ejecutar el código cada 1 minuto
-cron.schedule('* * * * *', () => {
-  console.log('Ejecutando el código cada 1 minuto.');
-  executeCode();
-});
-
-// Cron para ejecutar el código cada 1 minuto
-cron.schedule('* * * * *', () => {
-  console.log('Ejecutando el código cada 1 minuto.');
+cron.schedule('*/20 * * * *', () => {
+  console.log('Ejecutando el código cada 20 minutos.');
   executeCode();
 });
