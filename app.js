@@ -88,7 +88,7 @@ const sendFirstContactToAPI = async () => {
     if (allContacts.length > 0) {
       const firstContact = allContacts[0];
 
-      const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento, celular,  rut, sexo  } = firstContact;
+      const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento, celular,  rut, sexo, nombre_acompanante  } = firstContact;
 
       let selectedEmail = email || generateRandomEmail(nombre, apellidos);
       
@@ -133,7 +133,7 @@ const sendFirstContactToAPI = async () => {
         owner_name: "Claudia Yanes",
         owner: "contactenos@clinicasantaluciana.com.co",
         tags: ["Dentalink","api-test"],
-        description: "cedula: " + rut + "\ngenero: " + sexo + "\nFecha de Nacimiento" + fecha_nacimiento,
+        description: "cedula: " + rut + "\ngenero: " + sexo + "\nNombre Acompañante: " + nombre_acompanante,
         //custom_fields: [custom_field]
       };
 
