@@ -1,6 +1,8 @@
 import axios from 'axios';
 import fs from 'fs';
 import cron from 'node-cron';
+import moment from 'moment';
+
 
 const urlFetch = "https://api.dentalink.healthatom.com/api/v1/pacientes";
 const urlPost = "https://api.clientify.net/v1/contacts/";
@@ -122,6 +124,7 @@ const sendFirstContactToAPI = async () => {
         nit: rut
       };
 
+      const formattedBirthday = moment(fecha_nacimiento).format(); // Formatea la fecha de nacimiento
 
       
       const selectedData = {
@@ -135,6 +138,7 @@ const sendFirstContactToAPI = async () => {
         tags: ["Dentalink","api-test"],
         description: "cedula: " + rut + "\ngenero: " + sexo + "\nNombre Acompañante: " + nombre_acompanante,
         //custom_fields: [custom_field]
+        birthday: formattedBirthday
       };
 
 
