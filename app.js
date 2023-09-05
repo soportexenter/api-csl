@@ -14,7 +14,7 @@ const header = {
 };
 
 const headers = {
-  "Authorization": `Token ${apiKey}`
+  "Authorization": `Token ${apiKey}` 
 };
 
 const generateRandomEmail = (name, surname, email = '') => {
