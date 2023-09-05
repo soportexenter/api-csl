@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 import cron from 'node-cron';
-//import moment from 'moment';
+import moment from 'moment';
 
 
 const urlFetch = "https://api.dentalink.healthatom.com/api/v1/pacientes";
