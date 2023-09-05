@@ -88,7 +88,7 @@ const sendFirstContactToAPI = async () => {
     if (allContacts.length > 0) {
       const firstContact = allContacts[0];
 
-      const { nombre, apellidos, email, telefono, direccion, ciudad, fecha_nacimiento,rut } = firstContact;
+      const { nombre, apellidos, email, telefono, direccion, ciudad, rut } = firstContact;
 
       let selectedEmail = email || generateRandomEmail(nombre, apellidos);
       
@@ -114,6 +114,9 @@ const sendFirstContactToAPI = async () => {
         city: ciudad
       };
 
+      const cedulaCor = {
+        cedula: rut
+      }
       const selectedData = {
         first_name: capitalize(nombre), 
         last_name: capitalize(apellidos), 
@@ -122,8 +125,7 @@ const sendFirstContactToAPI = async () => {
         addresses: [direccionObj],
         owner_name: "",
         owner: " ",
-        //tags: [{}],
-        custom_fields: [{cedula:rut}]
+        custom_fields: [cedulaCor]
         
         // birthday: fecha_nacimiento
       };
