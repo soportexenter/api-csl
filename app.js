@@ -138,7 +138,7 @@ const sendFirstContactToAPI = async () => {
         tags: ["Dentalink","api-test"],
         description: "cedula: " + rut + "\ngenero: " + sexo + "\nNombre Acompañante: " + nombre_acompanante,
         //custom_fields: [custom_field]
-        birthday: formattedBirthday
+        //birthday: formattedBirthday
       };
 
 
