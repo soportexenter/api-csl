@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 import cron from 'node-cron';
-import moment from 'moment';
+//import moment from 'moment';
 
 
 const urlFetch = "https://api.dentalink.healthatom.com/api/v1/pacientes";
@@ -124,26 +124,8 @@ const sendFirstContactToAPI = async () => {
         nit: rut
       };
 
-      //const formattedBirthday = moment(fecha_nacimiento).format(); // Formatea la fecha de nacimiento
+     
 
-      const fechaCompleta = moment(fecha_nacimiento + hora_y_offset, moment.ISO_8601);
-
-const selectedData = {
-  first_name: capitalize(nombre),
-  last_name: capitalize(apellidos),
-  emails: [emailObj],
-  phones: [telefonoObj],
-  addresses: [direccionObj],
-  owner_name: "Claudia Yanes",
-  owner: "contactenos@clinicasantaluciana.com.co",
-  tags: ["Dentalink", "api-test"],
-  description: "cedula: " + rut + "\ngenero: " + sexo + "\nNombre Acompañante: " + nombre_acompanante,
-  
-  // Establece la fecha de cumpleaños formateada con hora y offset
-  birthday: fechaCompleta.format('YYYY-MM-DDTHH:mm:ssZ'),
-     };
-      
-  /*
       const selectedData = {
         first_name: capitalize(nombre), 
         last_name: capitalize(apellidos), 
@@ -157,7 +139,7 @@ const selectedData = {
         //custom_fields: [custom_field]
         //birthday: formattedBirthday
       };
-*/
+
 
       console.log('Datos a enviar:', selectedData);
 
