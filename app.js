@@ -126,7 +126,7 @@ const sendFirstContactToAPI = async () => {
         addresses: [direccionObj],
         owner_name: "Claudia Yanes",
         owner: "contactenos@clinicasantaluciana.com.co",
-       //custom_fields: [CedulaObj],
+        custom_fields: [CedulaObj],
         
         // birthday: fecha_nacimiento
       };
